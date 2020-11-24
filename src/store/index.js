@@ -14,6 +14,18 @@ export default createStore({
     currentUser: {}
   },
   mutations: {
+    setUserProfile(state, val) {
+      state.userProfile = val
+    },
+    setCurrentRoute(state, val) {
+      state.currentRoute = val
+    },
+    setCurrentDatabase(state, val) {
+      state.currentDatabase = val
+    },
+    setCurrentUser(state, val) {
+      state.currentUser = val
+    }
   },
   actions: {
     async login({ dispatch }, form) {

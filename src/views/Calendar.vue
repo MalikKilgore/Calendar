@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="calendar-root">
 
   </div>
 </template>
@@ -9,7 +9,7 @@
 
 
 export default {
-  name: 'Home',
+  name: 'Calendar',
   components: {
     
   }

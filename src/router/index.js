@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Calendar from '../views/Calendar.vue'
 import Join from '../views/Join.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
@@ -8,8 +8,8 @@ import { auth } from '../firebase/firebase.js'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Calendar',
+    component: Calendar,
     meta: {
       requiresAuth: true
     },
@@ -20,7 +20,7 @@ const routes = [
     component: Join,
     children: [
       {
-        path: '',
+        path: '/join/login',
         name: 'Login',
         component: Login,
       },
@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
 
   if (requiresAuth && !auth.currentUser) {
     console.log('User not signed in, redirecting to Login page.')
-    next('/join')
+    next('/join/login')
   } else {
     next()
   }
