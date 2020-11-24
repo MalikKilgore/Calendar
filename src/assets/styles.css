@@ -1,0 +1,29 @@
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #3a3c3f;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #56595d;
+    border-radius: 10px;
+  }
+
+* {
+    box-sizing: border-box;
+  }
+
+html, body {
+    height: auto;
+    width: auto;
+    background-color: #8a929e;
+    font-family: Helvetica, 'Roboto Slab', Arial, sans-serif; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

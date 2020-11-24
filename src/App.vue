@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/join">Join</router-link>
   </div>
   <router-view/>
 </template>
@@ -18,13 +18,17 @@
 #nav {
   padding: 30px;
 
-  a {
+	a {
     font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+	  color: #2c3e50;
+	  font-size: 24px;
+	  text-decoration: none;
+    	&.router-link-exact-active {
+      		color: #e8edff;
+		  }
+    	&:hover {
+      		color: #c9ccf0;
+    	}	
   }
 }
 </style>
