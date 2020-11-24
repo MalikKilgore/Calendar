@@ -72,7 +72,7 @@ export default createStore({
     
       // Clears userProfile and redirect to login page
       commit('setUserProfile', {})
-      router.push('/join')
+      router.push('/join/login')
     }
   },
   modules: {

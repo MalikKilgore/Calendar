@@ -1,10 +1,25 @@
 <template>
-  <div id="nav">
+  <div id="root">
     <router-link to="/">Calendar</router-link> |
     <router-link to="/join/login">Join</router-link>
+    <NavBar></NavBar>
   </div>
+  
   <router-view/>
 </template>
+<script>
+import Vue from 'vue'
+import router from './router'
+import Vuex from 'vuex'
+import NavBar from './components/NavBar'
+
+export default {
+  name: 'App',
+  components: {
+    NavBar
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -15,7 +30,7 @@
   color: #2c3e50;
 }
 
-#nav {
+#root {
   padding: 30px;
 
 	a {
