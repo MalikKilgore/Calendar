@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Calendar from '../views/Calendar.vue'
+import Events from '../views/Events.vue'
 import Join from '../views/Join.vue'
+import Settings from '../views/Settings.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import { auth } from '../firebase/firebase.js'
@@ -10,6 +12,22 @@ const routes = [
     path: '/',
     name: 'Calendar',
     component: Calendar,
+    meta: {
+      requiresAuth: true
+    },
+  },
+  {
+    path: '/events',
+    name: 'Events',
+    component: Events,
+    meta: {
+      requiresAuth: true
+    },
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings,
     meta: {
       requiresAuth: true
     },

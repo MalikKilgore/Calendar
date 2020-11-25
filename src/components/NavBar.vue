@@ -1,34 +1,53 @@
 <template>
   <div class="navBar">
-    <img src="../assets/paper-plane-right-duotone.svg" class="expandNav" />
+    <img
+      src="../assets/arrow-right-duotone.svg"
+      class="expandNav"
+      v-on:click="expand"
+    />
 
     <ul class="navList">
       <li class="listItem">
-        <a href="#"> <img src="../assets/calendar-duotone.svg" /> Calendar </a>
+        <router-link to="/">
+          <img src="../assets/calendar-duotone.svg" />
+          <p>Calendar</p>
+        </router-link>
       </li>
       <li class="listItem">
-        <a href="#"> <img src="../assets/hard-drives-duotone.svg" /> Events </a>
+        <router-link to="/events">
+          <img src="../assets/hard-drives-duotone.svg" />
+          <p>Events</p>
+        </router-link>
       </li>
       <li class="listItem">
-        <a href="#"> <img src="../assets/gear-duotone.svg" /> Settings </a>
+        <router-link to="/settings">
+          <img src="../assets/gear-duotone.svg" />
+          <p>Settings</p>
+        </router-link>
       </li>
-      <li class="listItem">
-        <a href="#"> <img src="../assets/list-duotone.svg" /> List </a>
+      <li id="logout" class="listItem" v-on:click="logout">
+        <a href="#">
+          <img src="../assets/sign-out-duotone.svg" />
+          <p>Logout</p>
+        </a>
       </li>
     </ul>
-
-    <button class="btn" v-on:click="logout">Logout</button>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "NavBar",
+
   methods: {
     //Log user out of application
     logout() {
       this.$store.dispatch("logout");
+    },
+    //Changes navbar opened/closed state.
+    expand() {
+      let navBar = document.querySelector(".navBar");
+      navBar.classList.toggle("nav-closed");
     },
   },
 };
@@ -36,7 +55,7 @@ export default {
 
 <style scoped lang="scss">
 :root {
-/* border radius */
+  /* border radius */
   --radius: 0.2rem;
 }
 
@@ -57,12 +76,13 @@ export default {
   top: 0;
 
   .expandNav {
-    width: 2rem;
-    height: 2rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
     fill: grey;
     background-color: #e0e0e0;
     box-shadow: 0px 0px 10px grey;
+    padding: 3px;
     right: -1rem;
     top: 1rem;
     z-index: 99;
@@ -72,7 +92,7 @@ export default {
     transition: transform 200ms ease-in-out;
 
     &:hover {
-      fill: grey;
+      background-color: #b8b8b8;
     }
   }
 
@@ -86,10 +106,6 @@ export default {
       padding: 1rem 1.5rem;
       border-left: 6px solid transparent;
       cursor: pointer;
-
-      &:first-child {
-        margin-bottom: 2rem;
-      }
 
       &:hover {
         background-color: grey;
@@ -105,14 +121,14 @@ export default {
       }
 
       img {
-        width: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
       }
     }
   }
 }
 
 a {
-  font-weight: bold;
   font-size: 40px;
   color: #18243a;
   text-decoration: none;
@@ -120,25 +136,26 @@ a {
   padding: 7px;
   &.router-link-exact-active {
     color: #e8edff;
+    background-color: grey;
   }
   &:hover {
-    color: #c9ccf0;
+    color: #e8edff;
   }
 }
 
-.btn {
-  padding: 5px 15px;
-  background: #ffffff;
-  color: #2c3e50;
-  border: 0;
-  border-radius: 5px;
-  font-size: 25px;
-  position: absolute;
-  left: 2rem;
-  bottom: 2rem;
-
+.listItem #logout {
   &:hover {
-    background: #a4a7c3;
+    color: #e8edff;
+    background-color: grey;
   }
+}
+
+//close state
+.nav-closed .expandNav {
+  transform: rotatez(0deg);
+}
+
+.nav-closed .listItem p {
+  display: none;
 }
 </style>

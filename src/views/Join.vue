@@ -34,7 +34,7 @@ export default {
 .join-header {
 	text-align: center;
 	padding: 20px;
-	background: #7289DA;
+	background: grey;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	h1 {

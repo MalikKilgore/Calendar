@@ -1,7 +1,5 @@
 <template>
   <div id="root">
-    <router-link to="/">Calendar</router-link> |
-    <router-link to="/join/login">Join</router-link>
     <NavBar></NavBar>
   </div>
   
