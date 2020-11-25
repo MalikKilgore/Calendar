@@ -6,9 +6,9 @@ export default createStore({
   state: {
     //Stores current user profile
     userProfile: {},
-    //Stores current route associated with the chatroom you're viewing
+    //Stores current route associated with the page you're viewing
     currentRoute: {},
-    //Stores current database associated with the chatroom you're viewing
+    //Stores current database associated with the page you're viewing
     currentDatabase: {},
     //Stores current signed in user reference
     currentUser: {}

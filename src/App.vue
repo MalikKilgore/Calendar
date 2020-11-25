@@ -1,9 +1,8 @@
 <template>
   <div id="root">
     <NavBar></NavBar>
+    <router-view/>
   </div>
-  
-  <router-view/>
 </template>
 <script>
 import Vue from 'vue'
@@ -19,17 +18,14 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+
 }
 
 #root {
-  padding: 30px;
+  padding: 0;
+  margin: 0;
 
 	a {
     font-weight: bold;

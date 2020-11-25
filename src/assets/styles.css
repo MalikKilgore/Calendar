@@ -26,4 +26,5 @@ html, body {
     font-family: Helvetica, 'Roboto Slab', Arial, sans-serif; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-align: center;
 }

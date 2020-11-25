@@ -5,9 +5,15 @@
 </template>
 
 <script>
-
+import EventForm from '../components/EventForm'
 
 export default {
-  name: 'Events'
+  name: 'Events',
+  components: {
+    EventForm
+  },
+  methods: {
+
+  },
 }
 </script>

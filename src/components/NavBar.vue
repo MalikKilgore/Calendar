@@ -115,9 +115,19 @@ export default {
         display: flex;
         gap: 1rem;
         align-items: center;
-        color: grey;
+        color: rgb(0, 0, 0);
         text-decoration: none;
+        font-size: 1.8rem;
+        padding: 7px;
         font-weight: 500;
+        vertical-align: middle;
+        &.router-link-exact-active {
+          color: #e8edff;
+          background-color: grey;
+        }
+        &:hover {
+          color: #e8edff;
+        }
       }
 
       img {
@@ -125,21 +135,6 @@ export default {
         height: 2.5rem;
       }
     }
-  }
-}
-
-a {
-  font-size: 40px;
-  color: #18243a;
-  text-decoration: none;
-  vertical-align: middle;
-  padding: 7px;
-  &.router-link-exact-active {
-    color: #e8edff;
-    background-color: grey;
-  }
-  &:hover {
-    color: #e8edff;
   }
 }
 
