@@ -74,6 +74,7 @@ export default {
   background-color: #e0e0e0;
   left: -1rem;
   top: 0;
+  z-index: 90;
 
   .expandNav {
     width: 2.4rem;
