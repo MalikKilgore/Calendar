@@ -19,10 +19,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#app {
-
-}
-
 #root {
   padding: 0;
   margin: 0;
