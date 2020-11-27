@@ -1,14 +1,12 @@
 <template>
   <div class="calendar-root">
     <div class="calendarNav">
-      <button v-on:click="backMonth">backward </button>
+      <img src="../assets/arrow-right-duotone.svg" id="back" v-on:click="backMonth"/>
+      <img src="../assets/arrow-right-duotone.svg" id="forward" v-on:click="fwdMonth"/>
       <h2>{{currentMonth}}, {{currentYear}}</h2>
-      <button v-on:click="fwdMonth">forward</button>
-
     </div>
 
     <div class="calendarBody" id="calendarBody">
-
 
     </div>
   </div>
@@ -20,7 +18,7 @@ import router from '../router'
 import store from '../store'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
-import datefns, {eachDayOfInterval} from 'date-fns'
+import datefns, {eachDayOfInterval, format} from 'date-fns'
 
 export default {
   name: 'Calendar',
@@ -77,7 +75,7 @@ export default {
           end: new Date(this.currentYear + 1, this.dateObj.nexMonth, this.dateObj.nexMax)
         })
         for (let i = 0; i < 35 ; i++){
-          grid[i].innerText = result[i]
+          grid[i].innerText = format(result[i], "MMMM do ',' yyyy")
         }
       } else if (this.currentMonth == 'January') {
         let result = eachDayOfInterval({
@@ -85,7 +83,7 @@ export default {
           end: new Date(this.currentYear, this.dateObj.nexMonth, this.dateObj.nexMax)
         })
         for (let i = 0; i < 35 ; i++){
-          grid[i].innerText = result[i]
+          grid[i].innerText = format(result[i], "MMMM do ',' yyyy")
         }
       } else {
         let result = eachDayOfInterval({
@@ -93,7 +91,7 @@ export default {
           end: new Date(this.currentYear, this.dateObj.nexMonth, this.dateObj.nexMax)
         })
         for (let i = 0; i < 35 ; i++){
-          grid[i].innerText = result[i]
+          grid[i].innerText = format(result[i], "MMMM do ',' yyyy")
         }
       }
     },
@@ -381,6 +379,32 @@ export default {
   grid-area: calendarNav;
   color: rgb(238, 235, 235);
   background-color:  #3a3c3f;
+
+    img {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      fill: grey;
+      background-color: #e0e0e0;
+      box-shadow: 0px 0px 10px grey;
+      padding: 3px;
+      cursor: pointer;
+      margin-top: 1rem;
+      
+      &#back {
+        transform: rotatez(-180deg);
+        margin-right: 1.3rem;
+      }
+
+      &:hover {
+        background-color: #b8b8b8;
+      }
+    }
+
+    h2 {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
 }
 
 #calendarBody {
