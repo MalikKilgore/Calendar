@@ -9,11 +9,12 @@ import Vue from 'vue'
 import router from './router'
 import Vuex from 'vuex'
 import NavBar from './components/NavBar'
+import EventForm from './components/EventForm'
 
 export default {
   name: 'App',
   components: {
-    NavBar
+    NavBar,
   }
 }
 </script>

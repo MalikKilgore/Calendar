@@ -7,6 +7,9 @@
     />
 
     <ul class="navList">
+      
+      <!-- <button id="create" v-on:click="createEvent">Create +</button> -->
+     
       <li class="listItem">
         <router-link to="/">
           <img src="../assets/calendar-duotone.svg" />
@@ -36,9 +39,10 @@
 </template>
 
 <script>
+
 export default {
   name: "NavBar",
-
+  emits: ['create-event'],
   methods: {
     //Log user out of application
     logout() {
@@ -48,6 +52,10 @@ export default {
     expand() {
       let navBar = document.querySelector(".navBar");
       navBar.classList.toggle("nav-closed");
+    },
+    createEvent(){
+      console.log('EMIT EVENT')
+      this.$emit('create-event')
     },
   },
 };
@@ -123,11 +131,11 @@ export default {
         font-weight: 500;
         vertical-align: middle;
         &.router-link-exact-active {
-          color: #e8edff;
+          color: #dbdbdb;
           background-color: grey;
         }
         &:hover {
-          color: #e8edff;
+          color: #dbdbdb;
         }
       }
 
@@ -141,8 +149,22 @@ export default {
 
 .listItem #logout {
   &:hover {
-    color: #e8edff;
+    color: #dbdbdb;
     background-color: grey;
+  }
+}
+
+button {
+  padding: 5px 15px;
+  margin-top: 30px;
+  background: #ffffff;
+  color: #2c3e50;
+  border: 0;
+  border-radius: 5px;
+  font-size: 25px;
+
+  &:hover {
+    background: #bebebe;
   }
 }
 

@@ -1,8 +1,10 @@
 <template>
   <div class="calendar-root">
+    <EventForm @create-event="hideDisplay" v-if="styleObject.display"></EventForm>
     <div class="calendarNav">
       <img src="../assets/arrow-right-duotone.svg" id="back" v-on:click="backMonth"/>
       <img src="../assets/arrow-right-duotone.svg" id="forward" v-on:click="fwdMonth"/>
+      <button id="create" v-on:click="hideDisplay">Create +</button>
       <h2>{{currentMonth}}, {{currentYear}}</h2>
     </div>
 
@@ -18,13 +20,17 @@ import router from '../router'
 import store from '../store'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
+import EventForm from '../components/EventForm'
+import NavBar from '../components/NavBar'
 import datefns, {eachDayOfInterval, format} from 'date-fns'
 
 export default {
   name: 'Calendar',
   data() {
     return {
-      //date-fns months go from Jan-Dec, using 0-11.
+      styleObject: {
+        display: false,
+      },
       previousMonth: 'October',
       currentMonth: 'November',
       nextMonth: 'December',
@@ -44,6 +50,7 @@ export default {
         November: 30,
         December: 31
       },
+      //date-fns months go from Jan-Dec, using 0-11.
       dateObj: {
         prevMonth: 9,
         prevMax: 31,
@@ -53,6 +60,10 @@ export default {
         nexMax: 31,
       },
     }
+  },
+  components: {
+    EventForm,
+    NavBar
   },
   methods: {
     //Generates the calendar days as CSS grid squares.
@@ -345,11 +356,21 @@ export default {
           this.timeInterval()
           break
       }
+    },
+    hideDisplay(){
+      console.log('EMIT RECEIVED')
+      switch(this.styleObject.display){
+        case false:
+          this.styleObject.display = true
+          break
+        case true:
+          this.styleObject.display = false
+          break
+      }
     }
   },
 
   mounted(){
-    console.log('CREATING GRID')
     this.createGrid()
     this.timeInterval()
   },
@@ -405,6 +426,21 @@ export default {
       margin-top: 0.5rem;
       margin-bottom: 1rem;
     }
+}
+
+button {
+  padding: 5px 15px;
+  margin-top: 1rem;
+  background: #ffffff;
+  color: #2c3e50;
+  border: 0;
+  border-radius: 5px;
+  font-size: 25px;
+  margin-left: 2rem;
+
+  &:hover {
+    background: #bebebe;
+  }
 }
 
 #calendarBody {

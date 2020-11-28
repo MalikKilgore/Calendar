@@ -46,10 +46,10 @@ export default {
     font-size: 24px;
     text-decoration: none;
     &.router-link-exact-active {
-      color: #e8edff;
+      color: #dbdbdb;
     }
     &:hover {
-      color: #c9ccf0;
+      color: #dbdbdb;
     }
   }
 }
@@ -95,7 +95,7 @@ export default {
   font-size: 25px;
 
   &:hover {
-    background: #a4a7c3;
+    background: #b8b8b8;
   }
 }
 </style>
