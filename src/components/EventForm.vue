@@ -84,20 +84,26 @@ export default {
   components: {
     NavBar
   },
+  emits: ['show-form'],
   methods: {
     addEvent(){
       console.log('placeholder: event added!')
       //dispatch a function to store, then close form. Need central store for display
     },
-    hideDisplay(){
-      switch(this.styleObject.display){
-        case false:
-          this.styleObject.display = true
-          break
-        case true:
-          this.styleObject.display = false
-          break
-      }
+    //change
+    emitEvent(){
+      console.log('EMIT EVENT')
+      this.$emit('show-form')
+    },
+    createEvent(){
+      this.$store.dispatch('createEvent', {
+        title: this.title,
+        startDate: this.startDate,
+        endDate: this.endDate,
+        startTime: this.startTime,
+        endTime: this.endTime,
+        description: this.description
+      })
     }
   },
 

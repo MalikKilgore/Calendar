@@ -8,7 +8,7 @@
 
     <ul class="navList">
       
-      <!-- <button id="create" v-on:click="createEvent">Create +</button> -->
+      <!-- <button id="create" v-on:click="emitEvent">Create +</button> -->
      
       <li class="listItem">
         <router-link to="/">
@@ -42,7 +42,7 @@
 
 export default {
   name: "NavBar",
-  emits: ['create-event'],
+  emits: ['show-form'],
   methods: {
     //Log user out of application
     logout() {
@@ -53,9 +53,9 @@ export default {
       let navBar = document.querySelector(".navBar");
       navBar.classList.toggle("nav-closed");
     },
-    createEvent(){
+    emitEvent(){
       console.log('EMIT EVENT')
-      this.$emit('create-event')
+      this.$emit('show-form')
     },
   },
 };

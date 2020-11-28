@@ -1,6 +1,6 @@
 <template>
   <div class="calendar-root">
-    <EventForm @create-event="hideDisplay" v-if="styleObject.display"></EventForm>
+    <EventForm @show-form="hideDisplay" v-if="styleObject.display"></EventForm>
     <div class="calendarNav">
       <img src="../assets/arrow-right-duotone.svg" id="back" v-on:click="backMonth"/>
       <img src="../assets/arrow-right-duotone.svg" id="forward" v-on:click="fwdMonth"/>

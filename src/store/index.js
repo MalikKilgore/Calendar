@@ -55,13 +55,15 @@ export default createStore({
       const { user } = await auth.createUserWithEmailAndPassword(form.email, form.password)
     
       // Creates user profile in usersCollections database/firestore
-      await usersCollection.doc(user.uid).set({
+      await usersCollection.doc(form.name).set({
         name: form.name,
         email: form.email,
         password: form.password,
         edit: false,
         uid: user.uid
       })
+
+      await usersCollection.doc(form.name).add('calendar')
 
       // Fetches the current user profile and updates it in state
       dispatch('fetchUserProfile', user).then(alert(`Account created for ${form.email}`))
@@ -73,6 +75,10 @@ export default createStore({
       // Clears userProfile and redirect to login page
       commit('setUserProfile', {})
       router.push('/join/login')
+    },
+
+    async createEvent({commit}, form){
+
     }
   },
   modules: {

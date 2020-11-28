@@ -23,9 +23,11 @@ const auth = firebase.auth()
 
 // Collection references
 const usersCollection = db.collection('users')
+//const userCalendar = db.collection('users').doc(user.displayName).collection('calendar')
 
 export {
     db,
     auth,
-    usersCollection
+    usersCollection,
+    //userCalendar
 }
