@@ -55,7 +55,7 @@ export default createStore({
       const { user } = await auth.createUserWithEmailAndPassword(form.email, form.password)
     
       // Creates user profile in usersCollections database/firestore
-      await usersCollection.doc(form.name).set({
+      await usersCollection.doc(user.uid).set({
         name: form.name,
         email: form.email,
         password: form.password,
@@ -63,7 +63,17 @@ export default createStore({
         uid: user.uid
       })
 
-      await usersCollection.doc(form.name).add('calendar')
+      //Creates calendar collection for user profile upon account creation.
+      await usersCollection.doc(user.uid).collection('calendar').doc('default event').set({
+        startDate: 'empty',
+        endDate: 'empty',
+        createdBy: user.uid,
+        createdOn: new Date(),
+        startTime: 'empty',
+        endTime: 'empty',
+        title: 'default title',
+        description: 'This is a filler test event.',
+      })
 
       // Fetches the current user profile and updates it in state
       dispatch('fetchUserProfile', user).then(alert(`Account created for ${form.email}`))
@@ -77,8 +87,21 @@ export default createStore({
       router.push('/join/login')
     },
 
-    async createEvent({commit}, form){
+    //Adds event document to user's calendar collection in Firestore.
+    async createEvent({dispatch}, form){
+      const user = this.state.currentUser
+      const calendar = await usersCollection.doc(user.uid).collection('calendar')
 
+      calendar.doc().set({
+        startDate: form.startDate,
+        endDate: form.endDate,
+        createdBy: user.uid,
+        createdOn: new Date(),
+        startTime: form.startTime,
+        endTime: form.endTime,
+        title: form.title,
+        description: form.description,
+      })
     }
   },
   modules: {

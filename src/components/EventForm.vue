@@ -1,6 +1,5 @@
 <template> 
   <div class="eventForm">
-    <header class="eventHeader">Create an Event</header> 
     <form @submit.prevent>
       <div class="form-control">
         <label for="title">Title</label>
@@ -53,10 +52,9 @@
           type="text"
           name="description"
           placeholder="description of the event"
-          required
         >
-        <button class="btn" v-on:click="addEvent">
-          Add Event
+        <button class="btn" v-on:click="createEvent">
+          Create Event
         </button>
       </div>
     </form>
@@ -86,10 +84,6 @@ export default {
   },
   emits: ['show-form'],
   methods: {
-    addEvent(){
-      console.log('placeholder: event added!')
-      //dispatch a function to store, then close form. Need central store for display
-    },
     //change
     emitEvent(){
       console.log('EMIT EVENT')
@@ -132,6 +126,7 @@ export default {
     }
 
 }
+/*
 .eventHeader{
   text-align: center;
   padding: 20px;
@@ -139,7 +134,8 @@ export default {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   z-index: 21;
-}
+} 
+*/
 label {
   color: #000000;
   font-weight: bold;

@@ -126,7 +126,7 @@ export default {
         align-items: center;
         color: rgb(0, 0, 0);
         text-decoration: none;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         padding: 7px;
         font-weight: 500;
         vertical-align: middle;

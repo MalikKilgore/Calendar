@@ -20,6 +20,7 @@ import router from '../router'
 import store from '../store'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
+import {usersCollection, db} from '../firebase/firebase'
 import EventForm from '../components/EventForm'
 import NavBar from '../components/NavBar'
 import datefns, {eachDayOfInterval, format} from 'date-fns'
@@ -59,6 +60,7 @@ export default {
         nexMonth: 11,
         nexMax: 31,
       },
+      unsubscribe: null,
     }
   },
   components: {
@@ -367,12 +369,47 @@ export default {
           this.styleObject.display = false
           break
       }
-    }
+    },
+    //renders events to the DOM
+    renderEvents(){
+      const user = store.state.currentUser
+      const calendar = usersCollection.doc(user.uid).collection('calendar')
+      
+      this.unsubscribe = calendar.orderBy('createdOn').onSnapshot(snapshot => {
+          snapshot.docChanges().forEach(change => {
+            //Event Added
+            if (change.type === 'added') {
+              console.log('New event: ', change.doc.data());
+
+            }
+            //Event Modified
+            if (change.type === 'modified') {
+              console.log('Modified event: ', change.doc.data());
+            }
+            //Event Removed
+            if (change.type === 'removed') {
+              console.log('Removed event: ', change.doc.data());
+            }
+        });
+      });
+    }, 
   },
 
   mounted(){
     this.createGrid()
     this.timeInterval()
+  },
+
+  //Unsubscribes from current firestore listener. Prevents duplicate listeners from being active at once.
+  beforeUnmount(){
+    const grid = document.querySelectorAll('.grid-square')
+    grid.innerHTML = '';
+    grid.textContent = '';
+    while (grid.lastElementChild) {
+      grid.removeChild(grid.lastElementChild)
+    };
+    console.log('ERASING EVERYTHING')
+    this.unsubscribe()
   },
 }
 </script>
