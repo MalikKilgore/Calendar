@@ -4,14 +4,16 @@ import { usersCollection, auth } from '../firebase/firebase.js'
 
 export default createStore({
   state: {
-    //Stores current user profile
+    //Stores user profile
     userProfile: {},
     //Stores current route associated with the page you're viewing
     currentRoute: {},
     //Stores current database associated with the page you're viewing
     currentDatabase: {},
     //Stores current signed in user reference
-    currentUser: {}
+    currentUser: {},
+    //Event emit response
+    showForm: false,
   },
   mutations: {
     setUserProfile(state, val) {
@@ -25,7 +27,11 @@ export default createStore({
     },
     setCurrentUser(state, val) {
       state.currentUser = val
-    }
+    },
+    setShowForm(state, val) {
+      state.showForm = val
+      console.log(`NEW VALUE IS ${state.showForm}`)
+    },
   },
   actions: {
     async login({ dispatch }, form) {
@@ -101,7 +107,13 @@ export default createStore({
         endTime: form.endTime,
         title: form.title,
         description: form.description,
-      })
+      }).then(dispatch('hideForm'))
+    },
+    async showForm({commit}){
+      commit('setShowForm', true)
+    },
+    async hideForm({commit}){
+      commit('setShowForm', false)
     }
   },
   modules: {

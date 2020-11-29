@@ -11,13 +11,16 @@ import store from '../store'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
 import {usersCollection, db} from '../firebase/firebase'
-import EventForm from '../components/EventForm'
 
 export default {
   name: 'Events',
+  data() {
+    return {
+      unsubscribe: null,
+    }
+  },
   components: {
     //Can also create events from this page.
-    EventForm
   },
   methods: {
     //renders events to the DOM
@@ -42,7 +45,16 @@ export default {
             }
         });
       });
-    }, 
+    },
+    showForm(){
+      this.$store.dispatch("showForm")
+    },
+    hideForm(){
+      this.$store.dispatch("hideForm")
+    },
+  },
+  mounted(){
+    this.hideForm()
   },
 }
 </script>

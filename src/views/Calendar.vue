@@ -1,10 +1,9 @@
 <template>
   <div class="calendar-root">
-    <EventForm @show-form="hideDisplay" v-if="styleObject.display"></EventForm>
     <div class="calendarNav">
       <img src="../assets/arrow-right-duotone.svg" id="back" v-on:click="backMonth"/>
       <img src="../assets/arrow-right-duotone.svg" id="forward" v-on:click="fwdMonth"/>
-      <button id="create" v-on:click="hideDisplay">Create +</button>
+      <button id="create" v-on:click="showForm">Create +</button>
       <h2>{{currentMonth}}, {{currentYear}}</h2>
     </div>
 
@@ -21,17 +20,12 @@ import store from '../store'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
 import {usersCollection, db} from '../firebase/firebase'
-import EventForm from '../components/EventForm'
-import NavBar from '../components/NavBar'
 import datefns, {eachDayOfInterval, format} from 'date-fns'
 
 export default {
   name: 'Calendar',
   data() {
     return {
-      styleObject: {
-        display: false,
-      },
       previousMonth: 'October',
       currentMonth: 'November',
       nextMonth: 'December',
@@ -64,8 +58,7 @@ export default {
     }
   },
   components: {
-    EventForm,
-    NavBar
+
   },
   methods: {
     //Generates the calendar days as CSS grid squares.
@@ -359,16 +352,11 @@ export default {
           break
       }
     },
-    hideDisplay(){
-      console.log('EMIT RECEIVED')
-      switch(this.styleObject.display){
-        case false:
-          this.styleObject.display = true
-          break
-        case true:
-          this.styleObject.display = false
-          break
-      }
+    showForm(){
+      this.$store.dispatch("showForm")
+    },
+    hideForm(){
+      this.$store.dispatch("hideForm")
     },
     //renders events to the DOM
     renderEvents(){
@@ -396,12 +384,13 @@ export default {
   },
 
   mounted(){
+    this.hideForm()
     this.createGrid()
     this.timeInterval()
   },
 
   //Unsubscribes from current firestore listener. Prevents duplicate listeners from being active at once.
-  beforeUnmount(){
+  /*beforeUnmount(){
     const grid = document.querySelectorAll('.grid-square')
     grid.innerHTML = '';
     grid.textContent = '';
@@ -410,7 +399,7 @@ export default {
     };
     console.log('ERASING EVERYTHING')
     this.unsubscribe()
-  },
+  },*/
 }
 </script>
 

@@ -64,13 +64,14 @@
 <script>
 import Vue from "vue";
 import router from "../router";
+import store from '../store'
 import Vuex from "vuex";
-import NavBar from '../components/NavBar'
 import { db, usersCollection } from "../firebase/firebase.js";
 
 export default {
   data() {
     return {
+      display: store.state.showForm,
       title: '',
       startDate: '',
       endDate: '',
@@ -79,16 +80,8 @@ export default {
       description: '',
     };
   },
-  components: {
-    NavBar
-  },
-  emits: ['show-form'],
   methods: {
-    //change
-    emitEvent(){
-      console.log('EMIT EVENT')
-      this.$emit('show-form')
-    },
+    //Dispatches to VueX store, sets event in Firestore. HIDES form afterwards.
     createEvent(){
       this.$store.dispatch('createEvent', {
         title: this.title,

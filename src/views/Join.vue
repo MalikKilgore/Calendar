@@ -13,6 +13,9 @@
 
 <script>
 import Vue from "vue";
+import router from '../router'
+import store from '../store'
+import Vuex from 'vuex'
 import Login from "../components/Login";
 import Register from "../components/Register";
 export default {
@@ -20,6 +23,17 @@ export default {
   components: {
     Login,
     Register,
+  },
+  methods: {
+    showForm(){
+      this.$store.dispatch("showForm")
+    },
+    hideForm(){
+      this.$store.dispatch("hideForm")
+    },
+  },
+  mounted(){
+    this.hideForm()
   },
 };
 </script>
