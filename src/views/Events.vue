@@ -1,14 +1,16 @@
 <template>
-  <div class="events">
-    <h1>This will hold your saved events</h1>
+  <div class="eventRoot">
+    <ul id="eventList" ref="eventList">
+    </ul>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue, { h } from 'vue'
 import router from '../router'
 import store from '../store'
 import Vuex from 'vuex'
+import CustomEvent from '../components/CustomEvent'
 import firebase from 'firebase/app'
 import {usersCollection, db} from '../firebase/firebase'
 
@@ -20,28 +22,61 @@ export default {
     }
   },
   components: {
-    //Can also create events from this page.
+    CustomEvent
   },
   methods: {
-    //renders events to the DOM
+    //renders events to the DOM with Firebase listener.
     renderEvents(){
       const user = store.state.currentUser
       const calendar = usersCollection.doc(user.uid).collection('calendar')
-      
+      const eventList = document.getElementById('eventList')
+      //var ComponentClass = Vue.extend(CustomEvent)
+      //var instance = new ComponentClass()
+
+      function render() {
+          return Vue.h(CustomEvent, {
+            editActive: false,
+            title: "",
+            startDate: "",
+            endDate: "",
+            startTime: "",
+            endTime: "",
+            description: "",
+          })
+        }
       this.unsubscribe = calendar.orderBy('createdOn').onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             //Event Added
             if (change.type === 'added') {
               console.log('New event: ', change.doc.data());
+              /*
+              Can instead generate a component here and give it unique identifier.
+
+              let eventItem = document.createElement('li');
+              eventItem.classList = 'event'
+              eventItem.style.border = '0.5rem solid black'
+              eventItem.style.listStyle = 'none'
+              eventItem.style.backgroundColor = 'white'
+              eventItem.innerHTML = change.doc.data().title 
               
+              
+              instance.$slots.default = [Vue.h(instance)]
+              instance.$mount()
+              this.$refs.eventList.appendChild(instance.$el) */
+              let newEvent = render()
+              newEvent.title = change.doc.data().title
+  
+              eventList.appendChild(eventItem)
             }
             //Event Modified
             if (change.type === 'modified') {
               console.log('Modified event: ', change.doc.data());
+
             }
             //Event Removed
             if (change.type === 'removed') {
               console.log('Removed event: ', change.doc.data());
+
             }
         });
       });
@@ -55,6 +90,7 @@ export default {
   },
   mounted(){
     this.hideForm()
+    this.renderEvents()
   },
 }
 </script>

@@ -69,6 +69,7 @@ import Vuex from "vuex";
 import { db, usersCollection } from "../firebase/firebase.js";
 
 export default {
+  name: 'EventForm',
   data() {
     return {
       display: store.state.showForm,
