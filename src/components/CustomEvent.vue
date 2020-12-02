@@ -63,11 +63,13 @@
         placeholder="description of the event"
       />
     </form>
+    <button v-on:click="toggleDisplay"></button>
   </div>
     <div class="customEventDisplay" v-else>
         <div class="display">
 
         </div>
+        <button v-on:click="toggleDisplay"></button>
     </div>
 </template>
 <script>
@@ -109,6 +111,16 @@ export default {
         description: this.description,
       });
     },
+    toggleDisplay(){
+      switch(this.editActive){
+        case false:
+          return this.editActive = true
+          break
+        case true: 
+          return this.editActive = false
+          break
+      }
+    }
   },
   computed: {
       editActive(){

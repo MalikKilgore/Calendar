@@ -30,8 +30,6 @@ export default {
       const user = store.state.currentUser
       const calendar = usersCollection.doc(user.uid).collection('calendar')
       const eventList = document.getElementById('eventList')
-      //var ComponentClass = Vue.extend(CustomEvent)
-      //var instance = new ComponentClass()
 
       function render() {
           return Vue.h(CustomEvent, {
@@ -63,8 +61,6 @@ export default {
               instance.$slots.default = [Vue.h(instance)]
               instance.$mount()
               this.$refs.eventList.appendChild(instance.$el) */
-              let newEvent = render()
-              newEvent.title = change.doc.data().title
   
               eventList.appendChild(eventItem)
             }
