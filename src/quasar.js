@@ -1,11 +1,5 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import Vuex from 'vuex'
-import './assets/styles.css'
-import { auth } from './firebase/firebase'
-import './quasar'
+import Vue from 'vue'
+
 import './styles/quasar.scss'
 import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/material-icons/material-icons.css'
@@ -13,4 +7,8 @@ import '@quasar/extras/material-icons-outlined/material-icons-outlined.css'
 import '@quasar/extras/material-icons-round/material-icons-round.css'
 import { Quasar } from 'quasar'
 
-createApp(App).use(store).use(router).mount('#app')
+/*Vue.use(Quasar, {
+  config: {},
+  plugins: {
+  }
+ })*/
